@@ -159,11 +159,14 @@ componentWillUnmount()
 举例：
 父组件加载过程。
 ![Alt text](./img/1482713740711.png)
+
 父组件更新过程，一般发生在state或者props发生改变。
 ![Alt text](./img/1482714001598.png)
 子组件加载和更新过程
+
 ![Alt text](./img/1482714894967.png)
-三部分：第一部分是正常加载。第二部分是我在willComponent更改了state。第三部分呢是didComponent更改了state
+
+这个有三部分：第一部分是正常加载。第二部分是我在willComponent更改了state。第三部分呢是didComponent更改了state
 此外，React 还提供两种特殊状态的处理函数。
 
     componentWillReceiveProps(object nextProps)：已加载组件收到新的参数时调用（一般就是 别的组件（比如说 父组件）传给他的值发生了变化，这个方法就会被触发）
@@ -192,6 +195,7 @@ componentWillUnmount()
     通过nextProps.id 拿到传来的值。如果没有触发父组件的method方法，这时候拿到的是1，如果触发了method方法，那么就是2.
 栗子：
 ![Alt text](./img/1482716271812.png)
+
 说一下传值吧。
 上述只是传了一个值，其实父组件还可以传多个值和方法作为属性给子组件。
 比如说，父组件有两个方法 m1(){...},m2(params1,params2){...},还有两个值 a,b需要传给子组件。其实不需要一个一个穿，把这四个作为一个对象传递。
