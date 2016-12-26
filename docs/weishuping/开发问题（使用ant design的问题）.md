@@ -3,7 +3,7 @@
 首页组件：导航栏、tab栏、需要随时加载A、B、C。
 默认：导航栏、tab栏、左tab是A，右tab是B。
 
-![Alt text](./1482717516463.png)
+![Alt text](./img/1482717516463.png)
 
 **问题**：warning: 缺少key
 
