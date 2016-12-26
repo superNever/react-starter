@@ -158,7 +158,7 @@ componentWillUnmount()
 ```
 举例：
 父组件加载过程。
-![Alt text](./1482713740711.png)
+![image](./1482713740711.png)
 父组件更新过程，一般发生在state或者props发生改变。
 ![Alt text](./1482714001598.png)
 子组件加载和更新过程
