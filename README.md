@@ -7,10 +7,15 @@
 ![Alt text](./1482717516463.png)
 
 **问题**：warning: 缺少key
+
 解决：给每次循环加上对应的key，目的是唯一标识虚拟DOM，key来确定最少的渲染。
+
 **问题**：为什么给listView设置1px 的底线看不见呢？
+
 解决： 人家官方默认就是1PX，解析出来就是2px啊！
+
 **问题**： 怎么吸顶？
+
 解决： ListView 有三种类型的滚动容器：
 1、html 的 body 容器
 2、局部 div 容器 (通过 ref 获取到)
@@ -27,6 +32,7 @@
         }
         let h = document.body.clientHeight - head2 - head1;
         this.setState({height: h});
+
 
 **问题**：listview初次加载，data为空报错。
 
@@ -57,6 +63,7 @@
 	        };
 	        ...
 	}
+	
 在DataSource中设置dataArr
 
 **业务问题：**
@@ -111,6 +118,7 @@
 	</div>
 
 **问题**：使用同一个listView。使用了RefreshControl 下拉刷新组件之后，在tab来回切换的时候，滚动条不能回到顶部。无法使用 overflow:auto 滚动，所以无法使用 scrollTop 重新定位。而且它将数据截断，比如有10条数据只渲染8条，需要拖动鼠标才可以。
+
 原因： ListView 有三种类型的滚动容器：
 1、html 的 body 容器
 2、局部 div 容器 (通过 ref 获取到)
@@ -145,4 +153,5 @@
                 refreshing={this.state.refreshing}
                 onRefresh={this.onRefresh}
             />}
+
 **注释**：在组件中作为属性的属性 使用`{/**/}`。属性使用`/**/`或者`//`都行
