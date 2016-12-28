@@ -6,6 +6,21 @@
 - 看看`一哥`在干啥 <br/>
 为了给吾等英语小白提供便利，`一哥`默默的翻译着这一堆乱七八糟的字母。想看文档的[请戳这里](https://github.com/superNever/react-starter/tree/master/docs/pengyi/quickstart)👍👍👍。
 
+## 目录
+```
+├── README.md
+├── dist
+├── docs
+│   ├── pengyi
+│   ├── react-step.md
+│   └── weishuping
+├── examples
+│   ├── components
+│   ├── index.html
+│   └── index.js
+├── node_modules
+├── package.json
+```
 ## TODO
 - [ ] webpack加入server
 - [ ] 丰富的demo事例

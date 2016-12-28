@@ -1,7 +1,7 @@
 {
   "name": "react-starter",
   "version": "1.0.0",
-  "description": "[文档在docs/weishuping](https://github.com/superNever/react-starter/tree/master/docs/weishuping)。",
+  "description": "react初学者分享一些自己心得",
   "main": "webpack.config.js",
   "directories": {
     "doc": "docs",
