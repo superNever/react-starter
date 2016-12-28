@@ -5,5 +5,5 @@
 [汉化文档在这里](https://github.com/superNever/react-starter/tree/master/docs/pengyi)。
 
 ## TODO
-- [ ]webpack加入server
-- [ ]丰富的demo事例
+- [ ] webpack加入server
+- [ ] 丰富的demo事例
