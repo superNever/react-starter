@@ -21,6 +21,20 @@
 ├── node_modules
 ├── package.json
 ```
+## 使用方法
+- dev
+
+```
+$ git clone https://github.com/superNever/react-starter.git&&cd react-starter
+$ npm install
+$ npm start
+```
+- prod
+
+```bash
+$ npm run build
+```
+
 ## TODO
 - [ ] webpack加入server
 - [ ] 丰富的demo事例
