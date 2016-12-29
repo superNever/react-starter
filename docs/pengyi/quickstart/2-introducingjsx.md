@@ -81,7 +81,7 @@ const element = (
 );
 ```
 > 注意：由于JSX语法较之HTML更加接近于Javascript，所以React DOM使用驼峰命名的方式来命名属性名，以此来替换HTML中的属性。
-> 举个例子比如`class`在JSX中必须写成`className`，`tabindex`必须写成`tabIndex`。下边主要介绍
+> 举个例子比如`class`在JSX中必须写成`className`，`tabindex`必须写成`tabIndex`。
 
 ### JSX可以阻止注入攻击
 
