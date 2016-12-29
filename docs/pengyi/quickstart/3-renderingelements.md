@@ -14,4 +14,3 @@ const element = <h1>Hello, world</h1>;
 
 > Tips: 一个常见的误区是将元素与组件(Components)弄混淆。元素只是构成组件的零部件。
 
-TODO....
