@@ -11,7 +11,7 @@
     "build": "webpack",
     "start": "webpack-dev-server ",
     "clean": "rm -rf dist/",
-    "eslint": "eslint --ext .js src",
+    "eslint": "eslint --ext .js examples",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
