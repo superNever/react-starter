@@ -19,7 +19,7 @@
     "url": "git+https://github.com/superNever/react-starter.git"
   },
   "pre-commit": [
-    "eslint"
+    "eslint" 
   ],
   "keywords": [
     "react-starter",
