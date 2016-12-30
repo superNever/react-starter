@@ -10,7 +10,7 @@ const defaultProps = {
 class DEMO1 extends React.Component {
   render() {
     return (
-      <h1>{this1.props.name}</h1>
+      <h1>{this.props.name}</h1>
     );
   }
 }

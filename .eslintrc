@@ -11,6 +11,6 @@
   "rules": {
     "max-len": [1, 120, 2, {ignoreComments: true}],
     "prefer-stateless-function": [ 0 , { "ignorePureComponents": true }],
-    //"prop-types": [2]
+    "prop-types": [2]
   }
 }
