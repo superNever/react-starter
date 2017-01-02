@@ -1,0 +1,16 @@
+{
+  "env": {
+        "browser": true,
+        "es6": true
+  },
+  "plugins": [
+    "react"
+  ],
+  parser: "babel-eslint",
+  //"extends": "airbnb",
+  "rules": {
+    "max-len": [1, 120, 2, {ignoreComments: true}],
+    "prefer-stateless-function": [ 0 , { "ignorePureComponents": true }],
+    //"prop-types": [2]
+  }
+}
