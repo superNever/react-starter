@@ -1,5 +1,5 @@
 ### 使用`protypes`进行类型校验
-#### 随着应用程序的增长，您可以通过类型校验发现很多bug。对于某些应用来说，你可以使用像`Flow`或者`TypeScript`的这样的JavaScript扩展来检查你整个应用。但是即使你不使用这些，React也有一些内置的类型校验的能力。下面我们可以尝试在一个组件的props上运行类型校验，你可以指定特殊的`propTypes` 属性类型：
+ 随着应用程序的增长，您可以通过类型校验发现很多bug。对于某些应用来说，你可以使用像`Flow`或者`TypeScript`的这样的JavaScript扩展来检查你整个应用。但是即使你不使用这些，React也有一些内置的类型校验的能力。下面我们可以尝试在一个组件的props上运行类型校验，你可以指定特殊的`propTypes` 属性类型：
 ```bash
 class Greeting extends React.Component {
   render() {
@@ -13,9 +13,9 @@ Greeting.propTypes = {
   name: React.PropTypes.string
 };
 ```
-#### `React.PropTypes`输出一系列的校验器,可用于确保您收到的数据是有效的。在此例中，我们使用了`React.PropTypes.string`。当我们把一个无效的值提供给prop时，JavaScipt控制台会显示一条警告。出于对性能的考虑，`propTypes`仅在开发模式下进行校验。
+ `React.PropTypes`输出一系列的校验器,可用于确保您收到的数据是有效的。在此例中，我们使用了`React.PropTypes.string`。当我们把一个无效的值提供给prop时，JavaScipt控制台会显示一条警告。出于对性能的考虑，`propTypes`仅在开发模式下进行校验。
 ### React.PropTypes
-#### 下面提供的例子记录了我们提供的不同校验器：
+ 下面提供的例子记录了我们提供的不同校验器：
 ```bash
 MyComponent.propTypes = {
   // You can declare that a prop is a specific JS primitive. By default, these
@@ -97,7 +97,7 @@ MyComponent.propTypes = {
 };
 ```
 ### 需要单一的子元素
-#### 您可以通过`React.PropTypes.element`指定只有一个单一的子元素可以作为`chlidren`传递给组件。
+ 您可以通过`React.PropTypes.element`指定只有一个单一的子元素可以作为`chlidren`传递给组件。
 ```bash
 class MyComponent extends React.Component {
   render() {
@@ -116,7 +116,7 @@ MyComponent.propTypes = {
 };
 ```
 ### 默认的`Prop`值
-#### 通过指定特殊的`defaultProps`属性值，你可以为你的`props`定义默认值,示例如下：
+ 通过指定特殊的`defaultProps`属性值，你可以为你的`props`定义默认值,示例如下：
 ```bash
 class Greeting extends React.Component {
   render() {
@@ -137,4 +137,4 @@ ReactDOM.render(
   document.getElementById('example')
 );
 ```
-#### `defaultProps`通常用来确保在父组件没有指定值的情况下，`this.props.name`存在值。在`defaultProps`解析完成之后才会进行`propTypes`的类型校验，所以类型校验也同样适用于`defaultProps`。
+ `defaultProps`通常用来确保在父组件没有指定值的情况下，`this.props.name`存在值。在`defaultProps`解析完成之后才会进行`propTypes`的类型校验，所以类型校验也同样适用于`defaultProps`。
