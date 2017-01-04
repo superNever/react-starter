@@ -16,4 +16,3 @@ const element = <h1>Hello, world</h1>;
 
 ### 渲染一个元素到DOM树中
 
-TODO
