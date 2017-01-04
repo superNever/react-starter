@@ -1,13 +1,13 @@
 ## 高阶指南
 ### 深入了解 JSX
- 从根本上讲，JSX仅仅是方法React.createElement(component, props, ...children)的语法糖，JSX的代码如下：
+从根本上讲，JSX仅仅是方法React.createElement(component, props, ...children)的语法糖，JSX的代码如下：
 
 ```bash
 <MyButton color="blue" shadowSize={2}>
   Click Me
 </MyButton>
 ```
- 我们可以查看编译后的代码：
+我们可以查看编译后的代码：
 ```bash
 React.createElement(
   MyButton,
@@ -15,7 +15,7 @@ React.createElement(
   'Click Me'
 )
 ```
- 如果没有子元素，你也可以使用自闭合的标签形式书写，如：
+如果没有子元素，你也可以使用自闭合的标签形式书写，如：
 ```bash
 <div className="sidebar" />
 ```
