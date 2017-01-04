@@ -33,16 +33,26 @@ module.exports = {
     resolve: {
         root: __dirname,
         modulesDirectories: ['node_modules'],
-        extensions: ['', '.web.js', '.js', '.json'],
+        extensions: ['', '.web.js', '.js','.jsx' ,'.json'],
         // 提高webpack搜索的速度
         alias: {}
     },
     devServer: {
         contentBase: "./dist",
     },
+    eslint:{
+        configFile:'./.eslintrc'
+    },
     module: {
+    	preLoaders: [
+			{
+			  test: /\.jsx?$/,
+			  exclude: /node_modules/,
+			  loader: 'eslint-loader'
+			}
+		],
         loaders: [{
-            test: /\.js$/,
+            test: /\.jsx?$/,
             loaders: ['happypack/loader?id=js']
         },  {
             test: /\.css/,
