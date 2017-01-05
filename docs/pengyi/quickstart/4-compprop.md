@@ -205,6 +205,28 @@ function Comment(props) {
 
 ### Props是只读的
 
+当以函数式或者类形式声明一个组件的时候，这个组件就无法改变它自己的props。看下边这个`sum`函数：
 
+```javascript
+function sum(a, b) {
+    return a + b;
+}
+```
 
+这种函数被称为纯函数，因为它并不改变输入的值，而且相同的输入下总是返回相同的结果。
 
+相应的，还有一种非纯函数，这种函数会改变它输入的值:
+
+```javascript
+function withdraw(account, amount) {
+    account.total -= amount;
+}
+```
+
+React非常灵活，但是有一条很严格的规则：
+
+**所有的React组件必须表现得像纯函数一样，不更改它们的props。**
+
+当然，所有的应用都是动态的，跟随时间所变化。下一节，我们会介绍一个新的概念`state`。
+
+在不违背上述规则的前提下，State允许React组件随着时间根据用户的动作、网络响应或者其他事件来做出变动。
