@@ -94,4 +94,117 @@ ReactDOM.render(
     document.getElementById('root')
 );
 ```
-TODO
+
+通常，React的应用拥有一个顶级的`App`组件。不过如果是将React集成进一个已经存在的应用里边，可能一开始是自底向上构建，比如从一个按钮一样的小组件开始，然后逐步向顶层构建。
+
+> 警告：组件必须返回一个单结点的根元素。这也是为什么上边将所有`<Welcome />`放置在一个`<div>`里边的原因。
+
+### 提取组件
+
+不必害怕将一个大的组件分解成为小的组件。
+
+举个例子，考虑将下边的`Comment`组件抽取成小的组件:
+
+```javascript
+function Comment(props) {
+    return (
+        <div className="Comment">
+            <div className="UserInfo">
+                <img className="Avatar" src={props.author.avatarUrl} alt={props.author.name}/>
+                <div className="UserInfo-name">
+                    {props.author.name}
+                </div>
+            </div>
+            <div className="Comment-text">
+                {props.text}
+            </div>
+            <div className="Comment-date">
+                {formatDate(props.date)}
+            </div>
+        </div>
+    );
+}
+```
+这个组件接受`anthor`(一个对象),`text`(一个字符串)和`date`(一个日期类型)作为props,在一个社交媒体网站上描述一段评论信息。
+
+这个组件很难去更改，因为所有的内容糅杂在一起了。这导致很难去复用组件里边的每一部分。让我们把这个组件里边的一些小的组件提取出来。
+
+首先可以提取`Avatar`组件来表示头像:
+
+```javascript
+function Avatar(props) {
+    return (
+        <img className="Avatar" src={props.user.avatarUrl} alt={props.user.name} />
+    );
+}
+```
+
+`Avatar`组件并不关心`Comment`组件中渲染什么样的内容，这也是为什么传递给`Avatar`一个更加通用的名字：`user`而不是`author`。
+
+推荐给props命名从这个组件自身作用的视角前去考虑，而不是这个组件将被用于什么样的场合。
+
+现在可以将`Comment`组件稍微简化一点:
+
+```javascript
+function Comment(props) {
+    return (
+        <div className="Comment">
+            <div className="UserInfo">
+                <Avatar user={props.author} />
+                <div className="UserInfo-name">
+                    {props.author.name}
+                </div>
+            </div>
+            <div className="Comment-text">
+                {props.text}
+            </div>
+            <div className="Comment-date">
+                {formatDate(props.date)}
+            </div>
+        </div>
+    );
+}
+```
+
+下一步提取一个`UserInfo`组件来渲染用户的姓名，这个组件包含用户的头像和姓名:
+
+```javascript
+function UserInfo(props) {
+    return (
+        <div className="UserInfo">
+            <Avatar user={props.user} />
+            <div className="UserInfo-name">
+                {props.user.name}
+            </div>
+        </div>
+    );
+}
+```
+
+这样可以让`Comment`组件进一步简化:
+
+```javascript
+function Comment(props) {
+    return (
+        <div className="Comment">
+            <UserInfo user={props.author} />
+            <div className="Comment-text">
+                {props.text}
+            </div>
+            <div className="Comment-date">
+                {formatDate(props.date)}
+            </div>
+        </div>
+    );
+}
+```
+
+提取组件可能是一件比较繁琐的工作，但是在大的应用中，提取各种各样可复用的组件回报很大！
+
+一个好的实践就是如果你的页面中某一部分被多次使用（比如`Button`,`Panel`,`Avatar`），或者这个组件自己很复杂（`App`,`FeedStory`,`Comment`）,那么将其提取成各种可复用的组件会是一个不错的选择。
+
+### Props是只读的
+
+
+
+
