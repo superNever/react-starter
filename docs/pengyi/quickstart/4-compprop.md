@@ -70,3 +70,28 @@ ReactDOM.render(
 
 ### 编写组件
 
+组件在输出的时候也可以引用其他的组件。这可以让我们用组件抽象出各种层级的细节。一个按钮，一个表单，一个对话框等：在React应用中，所有的这些都是通过组件来表达的。
+
+举个例子，我们可以通过创建一个`APP`组件来渲染多次`Welcome`组件:
+
+```javascript
+function Welcome(props) {
+    return <h1>Hello, {props.name}</h1>;
+}
+
+function App() {
+    return (
+        <div>
+            <Welcome name="Sara" />
+            <Welcome name="Cahal" />
+            <Welcome name="Edite" />
+        </div>
+    );
+}
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+);
+```
+TODO
