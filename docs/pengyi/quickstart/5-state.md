@@ -90,7 +90,7 @@ class Clock extends React.Component {
 
 将`date`从props变为state需要三步：
 
-1. 将`render()`方法中的`this.props.date`替换为`this.state.date`：
+1) 将`render()`方法中的`this.props.date`替换为`this.state.date`：
 
 ```javascript
 class Clock extends React.Component {
@@ -105,7 +105,7 @@ class Clock extends React.Component {
 }
 ```
 
-2. 为类添加一个构造函数`constructor`，并且声明和初始化`this.state`：
+2) 为类添加一个构造函数`constructor`，并且声明和初始化`this.state`：
 
 ```javascript
 class Clock extends React.Component {
@@ -134,7 +134,7 @@ constructor(props) {
 ```
 类组件应该在任何时候都传递`props`参数给基类构造函数并且调用。
 
-3. 移除`<Clock />`元素里边的`date`属性：
+3) 移除`<Clock />`元素里边的`date`属性：
 
 ```javascript
 ReactDOM.render(
