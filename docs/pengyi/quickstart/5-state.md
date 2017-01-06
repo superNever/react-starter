@@ -96,10 +96,10 @@ class Clock extends React.Component {
 class Clock extends React.Component {
     render() {
         return (
-        <div>
-            <h1>Hello, world!</h1>
-            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-        </div>
+            <div>
+                <h1>Hello, world!</h1>
+                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
         );
     }
 }
@@ -116,10 +116,10 @@ class Clock extends React.Component {
 
     render() {
         return (
-        <div>
-            <h1>Hello, world!</h1>
-            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-        </div>
+            <div>
+                <h1>Hello, world!</h1>
+                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
         );
     }
 }
@@ -155,10 +155,10 @@ class Clock extends React.Component {
 
     render() {
         return (
-        <div>
-            <h1>Hello, world!</h1>
-            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
-        </div>
+            <div>
+                <h1>Hello, world!</h1>
+                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
         );
     }
 }
@@ -172,5 +172,112 @@ ReactDOM.render(
 
 ### 添加生命周期函数
 
+在拥有很多组件的应用中，有一点非常重要，那就是当组件摧毁的时候一定要释放其占用的资源。
 
+我们想在`Clock`第一次渲染在DOM树中的时候设置一个定时器，这在react中叫做"挂载(monting)"。
 
+同样的，我们也想在`Clock`在DOM树中移除的时候清除掉定时器，这在react中叫做"卸载(unmounting)"。
+
+我们可以在组件类中声明一些特殊的方法，这些方法可以在组件挂载或者卸载的时候运行：
+
+```javascript
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+    }
+
+    componentDidMount() {
+
+    }
+
+    componentWillUnmount() {
+
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Hello, world!</h1>
+                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
+        );
+    }
+}
+```
+
+这些方法统称为"生命周期挂钩"。
+
+`componentDidMount()`挂钩函数会在组件渲染到DOM中之后执行，将计时器放到这里非常合适：
+
+```javascript
+componentDidMount() {
+    this.timerID = setInterval(
+        () => this.tick(),
+        1000
+    );
+}
+```
+
+注意这里我们将计时器的ID附在了`this`上边。
+
+`this.props`、由React来设置，`this.state`相比而言有着特殊的意义，你可以任意添加额外的字段到class中如果你需要存储一些额外信息，并且不需要用来作为显示输出。
+
+如果不需要在`render()`方法中使用一些变量，那么不就应该放置到state中。
+
+此外，我们还需要在`componentWillUnmount()`生命周期挂钩中清除掉计时器：
+
+```javascript
+componentWillUnmount() {
+    clearInterval(this.timerID);
+}
+```
+
+最后，我们来实现`tich()`方法，用来每秒更新时间。
+
+这个方法将会使用`this.setState()`来更新组件的本地state状态：
+
+```javascript
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+    }
+
+    componentDidMount() {
+        this.timerID = setInterval(
+            () => this.tick(),
+            1000
+        );
+    }
+
+    componentWillUnmount() {
+        clearInterval(this.timerID);
+    }
+
+    tick() {
+        this.setState({
+            date: new Date()
+        });
+    }
+
+    render() {
+        return (
+            <div>
+                <h1>Hello, world!</h1>
+                <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+            </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <Clock />,
+    document.getElementById('root')
+);
+```
+到现在，这个时钟就可以正常工作了。
+
+现在来快速回顾一下发生了什么以及这些方法调用的顺序：
+
+TODO
