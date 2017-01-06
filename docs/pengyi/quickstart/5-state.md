@@ -280,4 +280,102 @@ ReactDOM.render(
 
 现在来快速回顾一下发生了什么以及这些方法调用的顺序：
 
-TODO
+1. 当`<Clock />`传递给`ReactDOM.render()`的时候，React会调用`Clock`组件的构造函数。因为`Clock`需要显示当前时间，所以它用一个包含当前时间的对象来初始化`this.state`。之后我们还会更新这个state。
+2. 之后React调用`Clock`组件的`render()`方法。这一步React才知道需要在屏幕上展示什么内容。React接着更新DOM去匹配`Clock`的渲染输出。
+3. 当`Clock`组件的输出插入到DOM中的时候，React调用`componentDidMount()`方法。在这个方法中，`Clock`组件请求浏览器来设置一个定时器，每一秒钟调用一次`tick()`方法。
+4. 每一秒钟，浏览器都会调用`tick()`方法。这个方法中，`Clock`组件将一个包含当前时间的对象传递给`setState()`,以此来更新UI。通过`setState()`调用，React会知道state已经改变，然后再次调用`render()`方法去了解下一步要在屏幕上展示什么样的内容。这个时候，`render()`方法中的`this.state.date`会变化，所以渲染出来的结果将会包含更新过的时间。相应地，React更新DOM。
+5. 如果`Clock`组件从DOM中移除的话，React会调用`componentWillUnmount()`方法，这个时候计时器停止。
+
+### 正确使用State
+
+关于`setState()`,以下三点你必须知道。
+
+#### 不要直接去更改State
+
+举个例子，直接去修改state的话不会重新渲染组件：
+
+```javascript
+// Wrong
+this.state.comment = 'Hello';
+```
+
+如果要修改state，请使用`setState()`:
+
+```javascript
+// Correct
+this.setState({comment: 'Hello'});
+```
+
+**唯一可以直接对`this.state`直接赋值的地方是构造函数。**
+
+#### State的更新可能是异步的
+
+React可能会在一次更新操作中批处理多个`setState()`调用。
+
+因为`this.props`和`this.state`可能异步更新，所以你不应该依赖他们当前的值去计算将来的状态（state）。
+
+举个例子，下边的代码更新计数器可能会失败：
+
+```javascript
+// Wrong
+this.setState({
+    counter: this.state.counter + this.props.increment,
+});
+```
+
+为了针对这种情况，有另一种调用`setState()`方法的方式，那就是不再传递一个对象给它，而是传递一个函数。这个函数接受前一个状态值作为第一个参数，第二个参数是执行更新操作的时候的props属性：
+
+```javascript
+// Correct
+this.setState((prevState, props) => ({
+    counter: prevState.counter + props.increment
+}));
+```
+上边使用的是箭头函数，当然使用常规的函数也可以：
+
+```javascript
+// Correct
+this.setState(function(prevState, props) {
+    return {
+        counter: prevState.counter + props.increment
+    };
+});
+```
+
+#### State的更新会被合并
+
+当调用`setState()`的时候，React会合并你提供给当前state的所有对象。
+
+举个例子，你的state可能包含若干相互独立的变量：
+
+```javascript
+constructor(props) {
+    super(props);
+    this.state = {
+        posts: [],
+        comments: []
+    };
+}
+```
+
+之后你可能会分别调用`setState()`来互不影响地更新它们：
+
+```javascript
+componentDidMount() {
+    fetchPosts().then(response => {
+        this.setState({
+            posts: response.posts
+        });
+    });
+
+    fetchComments().then(response => {
+        this.setState({
+            comments: response.comments
+        });
+    });
+}
+```
+合并只是表面的，所以`this.setState({comments})`保证了`this.state.posts`的独立完整，但是完整替换了`this.state.comments`。
+
+### 数据流自上而下流动
+
