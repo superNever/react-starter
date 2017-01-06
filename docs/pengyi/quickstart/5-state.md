@@ -379,3 +379,53 @@ componentDidMount() {
 
 ### 数据流自上而下流动
 
+无论是父组件还是子组件都无法知道一个确定的组件是有状态的还是无状态的，而且它们也不应该关注组件是以何种方式定义。
+
+正因为如此，所以说state经常被认为是本地的或者封装的。对于任何组件，无论谁拥有它或设置它，都无法访问它的内部。
+
+一个组件可以将其state以props的方式向下传递给其子组件：
+
+```javascript
+<h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+```
+
+这种方式也适用于自定义组件：
+
+```javascript
+<FormattedDate date={this.state.date} />
+```
+
+`FormattedDate`组件可以接受`date`参数在其props中，并且不需要知道是否来自`Clock`组件的state或者props或者仅仅是被手动输入的：
+
+```javascript
+function FormattedDate(props) {
+    return <h2>It is {props.date.toLocaleTimeString()}.</h2>;
+}
+```
+这通常被称为"自顶向下"或者"单向"的数据流。任何state都属于一些特定的组件，任何组件中的数据或者源于state的UI元素都只能影响该组件下游的子组件。
+
+如果将一棵组件树想象成为props的瀑布，每一个组件的state都是一个额外的水源，这个水源可以并入瀑布任意一点，并且只能向下流动。
+
+为了表示所有组件确实是相互隔离的，我们可以创建一个`App`组件来渲染三个`Clock`：
+
+```javascript
+function App() {
+    return (
+        <div>
+            <Clock />
+            <Clock />
+            <Clock />
+        </div>
+    );
+}
+
+ReactDOM.render(
+    <App />,
+    document.getElementById('root')
+);
+```
+
+每一个时钟都会设置自己的计时器，并且互不影响地进行更新。
+
+在React应用中，无论一个组件是有状态的还是无状态的都被认为是一个组件的实现细节，都可能随着时间而改变。你可以在有状态的组件中使用无状态的组件，反过来也一样。
+
