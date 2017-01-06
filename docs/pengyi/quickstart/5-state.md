@@ -63,4 +63,114 @@ State和props很像，但是State是私有的，并且完全由组件自己来�
 
 ### 将函数式组件改写为类方式
 
-TODO....
+将一个函数式组件改写为类组件需要五步：
+
+1. 用相同的名字创建一个`ES6`的`class`，并且继承自`React.Component`。
+2. 添加一个空的方法`render()`。 
+3. 将函数组件的内部代码转移到`render()`方法内部。
+4. 替换`render()`方法内部的`props`属性为`this.props`。
+5. 删除空的函数声明。
+
+```javascript
+class Clock extends React.Component {
+    render() {
+        return (
+            <div>
+                <h1>Hello, world!</h1>
+                <h2>It is {this.props.date.toLocaleTimeString()}.</h2>
+            </div>
+        );
+    }
+}
+```
+
+如上所示，`Clock`组件现在已经从函数式定义转变为了类定义。这样一来，我们就可以使用一些额外的特性了，比如state和生命周期钩子。
+
+### 添加本地State
+
+将`date`从props变为state需要三步：
+
+1. 将`render()`方法中的`this.props.date`替换为`this.state.date`：
+
+```javascript
+class Clock extends React.Component {
+    render() {
+        return (
+        <div>
+            <h1>Hello, world!</h1>
+            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        </div>
+        );
+    }
+}
+```
+
+2. 为类添加一个构造函数`constructor`，并且声明和初始化`this.state`：
+
+```javascript
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+    }
+
+    render() {
+        return (
+        <div>
+            <h1>Hello, world!</h1>
+            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        </div>
+        );
+    }
+}
+```
+注意，我们传递了`props`给基类构造函数：
+
+```javascript
+constructor(props) {
+    super(props);
+    this.state = {date: new Date()};
+}
+```
+类组件应该在任何时候都传递`props`参数给基类构造函数并且调用。
+
+3. 移除`<Clock />`元素里边的`date`属性：
+
+```javascript
+ReactDOM.render(
+    <Clock />,
+    document.getElementById('root')
+);
+```
+我们稍后添加回来计时器相关的代码。
+
+目前的组件如下：
+
+```javascript
+class Clock extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {date: new Date()};
+    }
+
+    render() {
+        return (
+        <div>
+            <h1>Hello, world!</h1>
+            <h2>It is {this.state.date.toLocaleTimeString()}.</h2>
+        </div>
+        );
+    }
+}
+
+ReactDOM.render(
+    <Clock />,
+    document.getElementById('root')
+);
+```
+下一步，我们将给`Clock`逐渐设置计时器，并且让它每一秒都进行更新。
+
+### 添加生命周期函数
+
+
+
