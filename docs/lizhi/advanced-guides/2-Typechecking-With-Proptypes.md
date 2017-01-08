@@ -1,4 +1,5 @@
 ### 使用`protypes`进行类型校验
+***
  随着应用程序的增长，您可以通过类型校验发现很多bug。对于某些应用来说，你可以使用像`Flow`或者`TypeScript`的这样的JavaScript扩展来检查你整个应用。但是即使你不使用这些，React也有一些内置的类型校验的能力。下面我们可以尝试在一个组件的props上运行类型校验，你可以指定特殊的`propTypes` 属性类型：
 ```bash
 class Greeting extends React.Component {
