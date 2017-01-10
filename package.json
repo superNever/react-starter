@@ -1,7 +1,7 @@
 {
   "name": "react-starter",
   "version": "1.0.0",
-  "description": "react初学者分享一些自己心得",
+  "description": "react官网中文翻译 初学者 手册",
   "main": "webpack.config.js",
   "directories": {
     "doc": "docs",
