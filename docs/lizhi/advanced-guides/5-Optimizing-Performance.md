@@ -18,7 +18,6 @@ new webpack.optimize.UglifyJsPlugin()
 开发模式中的打包过程包含额外的警告信息，这对于打包校验`app`基本错误非常有用，但是由于这种额外的检验方式也会导致`App`的响应速度变慢。
 ### 通过`Chrome Timeline`分析组件性能
 在开发模式中，你可以可视化组件的挂载，更新和卸载，使用浏览器支持的性能工具，例如：
-![Alt text](./react-perf-chrome-timeline.png)
 
 在Chrome中这样操作：
 1.使用`?react_perf`匹配需要查询的字符串来登录你的`app`（例如,`http://localhost:3000/?react_perf`）。
@@ -39,4 +38,4 @@ shouldComponentUpdate(nextProps, nextState) {
 如果你知道有些情况下你的组件是不需要更新时，你可以通过`shouldComponentUpdate`函数返回`false`来代替，跳过整个渲染过程，包括此组件中调用的`render()`和下面的方法。
 ### shouldComponentUpdate的运行过程
 下面是一张树状子树的描述图。对于每个点，`scu`指出了`shouldComponentUpdate`返回什么值，`vDOMEq`表明虚拟DOM与已渲染的React元素是否相同。最后，圆的颜色表明组件是否必须重新渲染。
-![Alt text](./should-component-update.png)
+![image](./img/should-component-update.png)
